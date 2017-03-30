@@ -1,0 +1,58 @@
+<table id="divTextBkg">
+	<tr></tr>
+	<br>
+	<tr>
+		<td width="50%">
+			<tr>
+				<td width="10%">
+				</td>
+				<td width="50%">
+					{{input class="text-box-control" placeholder="Enter tool, app, or team." value=appSearch key-press="appQuery" autofocus="autofocus"}}		
+				</td>
+				<td width="2%">
+				</td>
+				<td width="30%">
+					<button class="btn-blue btn-primary" {{action 'createRequest'}}>Create Request</button>
+				</td>
+			</tr>
+		</td>
+		<td width="50%">
+			<tr>
+				<td width="10%">
+				</td>
+				<td width="50%">
+					{{input class="text-box-control" placeholder="Enter request # (e.g. 12345)." value=reqSearch}}
+				</td>
+				<td width="2%">
+				</td>
+				<td width="30%">
+					<button class="btn-blue btn-primary btn-block" {{action 'getStatus'}}>Get Status</button>
+				</td>
+			</tr>			
+		</td>
+	</tr>
+	<tr>
+		<td width="50%">
+			<div style="width:50%; text-align:center;">	Help me Decide</div>			
+		</td>
+		<td width="50%">
+		{{#link-to 'statusdetails'}}
+			<div style="width:50%; text-align:center;">View all Requests</div>			
+		{{/link-to}} 
+		
+		</td>
+	</tr>
+	<br>
+	<tr></tr>
+</table>
+
+<br>
+<table width='100%' align="center">
+	<div width='70%' align="left">
+		<!-- <img src="/assets/image/lappy.png" width="75%" align="left">
+		 -->
+
+	</div>
+	<div class="label label-default label-primary" width='25%' align="right"></div>
+</table>
+	

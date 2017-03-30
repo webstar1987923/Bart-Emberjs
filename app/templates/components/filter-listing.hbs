@@ -1,0 +1,12 @@
+<div class="auto-complete-holder">
+	{{input value=filter key-up=(action 'autoComplete' filter) 
+	        focus-out=(action 'clearFocus') class="form-control home-control" 
+	        placeholder="Enter Product Name" autocomplete='off'}} 
+	{{#if filteredList}}
+	<ul class="ui-autocomplete">
+	  {{#each filteredList as |item|}}
+	    <li class="ui-menu-item" {{action 'choose' item.value}}>{{item.label}}</li>
+	  {{/each}}
+	</ul>
+	{{/if}}
+</div>

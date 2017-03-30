@@ -1,0 +1,85 @@
+
+
+<div class="table-wrapper">
+
+	<table id="customers">
+		<thead bgcolor="#595959">
+			<tr>
+				<th></th>
+				<th>Request #</th>
+				<th>Status</th>
+				<th>Request Type</th>
+				<th>Application</th>
+				<th>Summary</th>
+				<th>Opened</th>
+				<th>Reported by</th>
+				<th>watcher</th>
+			</tr>
+		</thead>
+		<tbody>
+		{{#if model.requestNumber}}
+			<tr>
+			<td>
+				<button class="comment_toggler {{if isShowComment "open"}}" type="button" 
+				data-toggle="collapse" data-target="#collapseComments" aria-expanded="false" 
+				aria-controls="collapseComments" {{action "getLog" model}}> </button>
+				
+			</td>
+			<td><a>{{model.requestNumber}}</a></td>
+			<td>{{model.status}}</td>
+			<td>{{model.requestType}}</td>
+			<td>{{model.application}}</td>
+			<td>{{model.summary}}</td>
+			<td>{{model.opened}}</td>
+			<td>{{model.reportedBy}}</td>
+			<td>{{model.watcher}}</td>
+			</tr>
+
+			<tr style="border:0px;">
+				<td colspan="8">
+					<div class="collapse" id="collapseComments">
+						<div class="comment_container">
+							<div class="comment_container_header">
+								<button class="comment_bubble {{if isAddComment "open"}}" type="button" 
+								data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" 
+								aria-controls="collapseExample" {{action "addComment"}}></button>
+							</div>
+							<div class="comment_container_body">
+						 	{{#each logs as |log|}}
+						 	<div>
+						 	<p>{{{log.CreatedBy}}}{{log.UserName}}:{{log.LogDate}}</p>
+						 	<p>{{log.LogText}}</p> </div>
+						 	{{/each}}
+						 	{{#if logNotAvailable}}
+						 		
+								<p> Loading...</p>
+						 	{{/if}}
+						 	</div>
+						</div>
+					</div>
+				
+					<div class="collapse" id="collapseExample">
+					{{!--  {{tinymce-editor options=options value=model.comment class="comment-box" placeholder="Add comment"}} --}}
+						<textarea value='{{model.comment}}' class="comment-box" placeholder="Add comment"></textarea>
+						 <div class="form-group">
+		                  <button class="btn btn-primary">Save</button>
+		                  <button class="btn btn-primary">Cancel</button>
+		                </div>
+					</div>
+				</td>
+			</tr>
+			{{else}}
+				<tr> <td colspan="8">No data found.</td> </tr>
+			{{/if}}
+			
+		</tbody>
+	</table>
+
+	{{!-- <div class="commentImgDiv">
+		<img src="/bart/assets/image/options.png" class="options">
+		<img src="/bart/assets/image/comment.png" class="commentImg">
+		<img src="/bart/assets/image/add.png" class="add">
+	</div> --}}
+
+
+</div>

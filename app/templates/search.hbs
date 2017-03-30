@@ -1,0 +1,28 @@
+<div class="table-header"class="hidden">
+    <div class="filter-container">
+      <input name="" type="text">
+      <img src="/bart/assets/image/search.gif">
+    </div>
+    <div class="table-action">
+      <img src="/bart/assets/image/export.gif">
+    </div>
+</div>
+
+<table id="productsTable" class="table table-striped">
+	<thead class="blue-header">
+		<th class="asc col-md-3">Short Description</th>
+		<th class="col-md-7">Description</th>
+		<th class="col-md-2">Type</th>
+	</thead>
+	<tbody>
+	{{#each model as |product|}}
+		<tr>
+			<td><a {{action "gotoCreate" product.shortDesc}}>{{product.shortDesc}}</a></td>
+			<td>{{product.description}}</td>
+			<td>{{product.type}}</td>
+		</tr>
+	{{/each}}
+	</tbody>
+</table>
+
+{{outlet}}

@@ -1,0 +1,179 @@
+
+<div id="foo" class="container center">
+   <div class="row">
+		<div class="col-xs-6 text-center">
+		  <h4>{{model.shortDesc}}</h4>
+		</div>
+		<div class="col-xs-6 text-center">
+		  <h4>{{issuetype}}</h4>
+		</div>
+
+   </div>
+  
+   <hr />
+  <div class="row">
+		<div class="col-xs-3 text-right">
+		  <label class="form-control-label control-label">Reported by:</label>
+		</div>
+		<div class="col-xs-4">
+
+		  <div class="row">
+			<span class="col-xs-2">Name</span> 
+			<span class="col-xs-8">{{model.fullName}}</span>
+		  </div>
+
+		  <div class="row">
+			<span class="col-xs-2">ATTUID</span> 
+			<span class="col-xs-8">{{model.attuid}}</span>
+		  </div>
+		  
+		  <div class="row">
+			<span class="col-xs-2">Phone</span> 
+			<span class="col-xs-8">{{model.phone}}</span>
+		  </div>
+		</div>
+		{{#if issuetype}}
+		<div class="col-xs-4">
+			<div class="row">
+			  <label>
+				<input type="checkbox" name="reportedBy" value={{createRequestForm.creatingForSomeoneElse}} onclick={{action 'showReportedBy'}}>
+				Click here if creating for someone else
+			  </label>
+			</div>
+			<div class="row">
+			  <label>
+				{{input type="checkbox" checked=createRequestForm.addWatchers}} Click here to add watcher(s)
+			  </label>
+			</div>
+		</div>
+		{{/if}}
+	</div>
+
+<div class="steps-container center">
+  <div class="step step-1 ">
+	<div class="container">
+	  <h4> What type of request would you like to make? </h4>
+
+	   {{!--  {{#power-select selected=selectedRequestType options=requestType onchange=(action "requestTypeChanged") as |request|}}
+		  {{request.title}}
+		{{/power-select}} --}}
+		<div>
+		<div class="row"><span class="col-xs-2"><label>
+			<input type="radio" 
+				name="requestType" 
+				value="support_issue" 
+				class="step-trigger" 
+				data-target=".step-2" 
+				onclick={{action "requestTypeChanged" "break_fix"}}
+			>
+		  </label>Break Fix :</span>
+			<span class="col-xs-9">Unable to perform work due to an error, complication or issue with the application.</span>
+		  </div>
+		  <div class="row"><span class="col-xs-2">
+		  <label>
+			<input type="radio" 
+				name="requestType" 
+				value="enhancement" 
+				class="step-trigger" 
+				data-target=".step-2" 
+				onclick={{action "requestTypeChanged" "enhancement"}}
+				>
+		  </label>Enhancement :</span>
+			<span class="col-xs-9">Existing Tool or Application requires an improvement to perform the function being requested.</span>
+		  </div>
+		  <div class="row"><span class="col-xs-2">
+			<label>
+				<input type="radio" 
+					name="requestType" 
+					value="uat" 
+					class="step-trigger" 
+					data-target=".step-2" 
+					onclick={{action "requestTypeChanged" "uat"}}
+				>
+			</label>User Testing (UAT) :</span>
+			<span class="col-xs-9">Issue found while testing a pre-production/Beta release of an application.</span>
+		  </div>
+		</div>
+	</div>
+  </div>
+  <div class="step step-2 hide col-xs-7">
+	  
+	  <form class="form-horizontal">
+	  <div class="form-group margin-tp-btm">
+        <label class="col-xs-3 control-label">Summary:</label>
+        <div class="col-xs-9">
+          {{input type="text" name="summary" value=createRequestForm.summary class="form-control" placeholder="Please enter short description"}}
+        </div>
+      </div>
+		<input type="hidden" name="attachments" id="attachments">
+		<table>
+		  <tbody id="createForm">
+			  
+			  
+		  </tbody>
+		</table>
+	  </form>
+	  <ul class="list-group hidden" id="attachmentsList">
+		<li class="list-group-item active">Uploaded Files</li>
+	  </ul>
+	  <form action="/upload" enctype="multipart/form-data" method="POST" id="attachmentForm">
+		 <div class="form-group margin-tp-btm row">
+		  <label for="exampleInputFile" class="control-label">Attach File</label>
+		  <div class="col-sm-7">
+			<input type="file" name="files" id="files" />
+		  </div>   
+		  <div class="col-sm-2">
+		  <input type="submit" class="btn btn-primary btn-xs" name="upload" value="Upload" {{action "uploadFile" }}>
+		  </div>
+		</div>
+	  </form>
+
+	  <div class="row">
+		<button type="button" class="btn btn-default pull-right" {{action "cancle"}}>Cancel</button>
+		<button type="button" {{action "submit"}} class="btn btn-primary pull-right margin-lr-20">Create</button>
+		<div class="checkbox pull-right margin-top-0 margin-lr-20 hidden">
+		  <label>
+			{{input type="checkbox" checked=createRequestForm.createAnotherRequest}} Create Another Request <br /> For this application 
+		  </label>
+		</div>
+	  </div>
+  </div>
+</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+	  </div>
+	  <div class="modal-body">
+		<form class="form-horizontal">
+		  <div class="form-group">
+		    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Full name">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputPassword3" class="col-sm-2 control-label" size='6'>ATTUID</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control" id="attuid" name="attuid" placeholder="ATTUID" size="6" maxlength="6">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="inputPassword3" class="col-sm-2 control-label">Phone</label>
+		    <div class="col-sm-10">
+		      <input type="number" class="form-control" id="phone" name="phone" placeholder="Phone">
+		    </div>
+		  </div>
+		</form>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-default" {{action "clearForm"}}>Close</button>
+		<button type="button" class="btn btn-primary" {{action "updateReportedBy"}}>Save changes</button>
+	  </div>
+	</div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+@import "ember-power-select";
+@import "app/styles/style.scss";
+@import "app/styles/create-request-wizard.scss";
+@import "app/styles/home.scss";
+
+// body {
+//   padding: 0px;
+// }
+
+// input {
+//   float:left;
+// }
+
+html, body {
+    height: 100%;
+}
+
+label {
+  color: #555;
+  font-weight: 600;
+}
+
+.ember-application > .ember-view {
+  height: 100%;
+}

@@ -1,0 +1,114 @@
+{{!-- {{status-detail model=model}} --}}
+
+
+
+<div class="table-wrapper">
+
+	<table id="tickets">
+		<thead bgcolor="#595959">
+			<tr>
+				<th>Actions</th>
+				<th>Request #</th>
+				<th>Status</th>
+				<th>Request Type</th>
+				<th>Product Name</th>
+				<th>Summary</th>
+				<th>Opened</th>
+				<th>Requested by</th>
+				<th>BizOps Contact</th>
+			</tr>
+		</thead>
+		<tbody>
+		{{#if model.requestNumber}}
+			<tr>
+			<td>
+        <input type="checkbox" name="notifications[{{model.id}}]" value="1">
+				<button class="comment_bubble {{if isShowComment "open"}}" type="button" 
+				data-toggle="collapse" data-target="#collapseComments" aria-expanded="false" 
+				aria-controls="collapseComments" {{action "getLog" model}}> </button>
+				
+			</td>
+			<td><a data-toggle="collapse" data-target="#collapseComments" aria-expanded="false" 
+        aria-controls="collapseComments" {{action "getLog" model}}>{{model.requestNumber}}</a></td>
+			<td>{{model.status}}</td>
+			<td>{{model.requestType}}</td>
+			<td>{{model.application}}</td>
+			<td>{{model.summary}}</td>
+			<td>{{model.opened}}</td>
+			<td>{{model.reporterName}} {{#if model.reportedBy}} ({{model.reportedBy}}) {{/if}}</td>
+			<td title="BizOps Contact">{{{model.watcher}}}</td>
+			</tr>
+
+			
+
+      <tr class="comments_tr" style="border:0px;">
+            <td colspan="9">
+              <div class="side_margins collapse" id="collapseComments">
+                <div class="row">
+                  <div class="col-md-6 col-xs-12" >
+                    <div class="comment_container">
+                        <div class="comment_container_header clearfix">
+                          {{#if model.canAddLog}}
+                          <button class="{{if model.isAddComment "open"}}" type="button" 
+                          data-toggle="collapse" data-target="#commentEditor" 
+                          aria-expanded="false" 
+                          aria-controls="commentEditor" {{action "addComment"}}
+                          title="Add comment">
+                          <span class="comment_toggler" aria-hidden="true"></span>
+                          </button>
+                          {{/if}}
+                        </div>
+                        <table>
+                          <thead>
+                            <th>Created By</th>
+                            <th>Text</th>
+                            <th>Date</th>
+                          </thead>
+                          <tbody class="comment_container_body">
+                            {{#each sortedLogs as |log|}}
+                                <tr>
+                                <td>{{{log.CreatedBy}}}{{log.UserName}}</td>
+                                <td>{{log.LogText}}</td> 
+                                <td>{{log.LogDate}}</td>
+                                </tr>
+                            {{/each}}
+                            {{#if logNotAvailable}}
+                                  
+                                <tr><td colspan="3">Loading...</td></tr>
+                            {{/if}}
+                            
+                          </tbody>
+                        </table>
+                      </div>
+                  </div>
+                  <div class="col-md-6 col-xs-12 collapse" id="commentEditor">
+                    <form>
+                      <div class="form-group">
+                        
+                        <textarea id="comment_editor" class="comment-box" placeholder="Add comment" rows="5" cols="70" ></textarea>
+                        </div>
+                      <div class="form-group">
+                        <button class="btn btn-primary" {{action 'addLog' model}}>Save</button>
+                        <button class="btn btn-primary" {{action 'cancel'}}>Cancel</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+			{{else}}
+				<tr> <td colspan="8">No data found.</td> </tr>
+			{{/if}}
+			
+		</tbody>
+	</table>
+
+	{{!-- <div class="commentImgDiv">
+		<img src="/bart/assets/image/options.png" class="options">
+		<img src="/bart/assets/image/comment.png" class="commentImg">
+		<img src="/bart/assets/image/add.png" class="add">
+	</div> --}}
+
+
+</div>

@@ -1,0 +1,27 @@
+{{#light-table table height='65vh' as |t|}}
+
+  {{t.head
+    onColumnClick=(action 'onColumnClick')
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+    fixed=true class='alt' style='bgcolor:#595959;'
+  }}
+
+  {{#t.body
+    canSelect=false
+    onScrolledToBottom=(action 'onScrolledToBottom')
+    as |body|
+  }}
+    {{#if isLoading}}
+      {{#body.loader}}
+        {{table-loader}}
+      {{/body.loader}}
+    {{/if}}
+    {{#if table.isEmpty}}
+      {{#body.no-data}}
+        No tickets found.
+      {{/body.no-data}}
+    {{/if}}
+  {{/t.body}}
+
+{{/light-table}}

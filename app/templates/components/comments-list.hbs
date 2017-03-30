@@ -1,0 +1,21 @@
+<div class="comment_container_body">
+	<p>Loading...</p>
+
+	<table>
+	<thead>
+	<th>User</th>
+	<th>Comment</th>
+	<th>Date</th>
+	</thead>
+	<tbody>
+		{{#each sortedLog as |log|}}
+			<tr>
+				<td>{{log.CreatedBy}}{{log.UserName}}</td>
+				<td>{{log.LogText}}</td>
+				<td>{{log.LogDate}}</td>
+			</tr>
+		{{/each}}
+	</tbody>
+	</table>
+
+</div>

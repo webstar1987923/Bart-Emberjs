@@ -1,0 +1,40 @@
+<section id="three" class="wrapper align-center">
+  <div class="inner">
+  {{#link-to "home" }}<img src="/bart/assets/image/right-side.png" alt="logo">{{/link-to}}
+     <!-- /assets/...jm7752 1/19 3:24 -->
+  </div>
+</section>
+
+<div class="inner">
+  <form {{action "viewStatus" on="submit"}} class="text-center form-inline col-xs-6">
+      <h3 class="caption">Create Request</h3>
+      <div class="form-group">
+        <div class="inline-block pull-left margin-r-10">
+          {{filter-listing filteredList=filteredList autoComplete=(action 'autoComplete') 
+          choose=(action "choose")  class="inline-div" }}
+          <a class="form-link" href="/bart/Search">Advanced Search</a>
+
+        </div>
+
+        <button type="submit" {{action "showCreateWizard"}} class="btn btn-primary pull-left">Create</button>
+        
+      </div>
+  </form>
+
+  <form {{action "viewStatus" on="submit"}} class="text-center form-inline col-xs-6">
+      <h3 class="caption">View Existing</h3>
+      <div class="form-group">
+        <div class="inline-block pull-left margin-r-10">
+          {{input class="form-control home-control" value=requestNumber placeholder="Enter Request Number" id="status"}}
+          <a class="form-link" href="/bart/Details">View All Requests</a>
+        </div>
+        <button type="submit" {{action "viewStatus"}} class="btn btn-primary view_existing_submit pull-left">View</button>
+      </div>
+    
+  </form>
+
+    
+</div>
+
+
+

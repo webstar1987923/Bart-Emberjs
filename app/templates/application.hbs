@@ -1,0 +1,19 @@
+<header id="header">
+  <div class="inner logo">
+    {{#link-to "home" }}<img src="/bart/assets/image/right-side.png" alt="logo" class="logo_img">{{/link-to}}
+    {{#link-to "home" }}<h3>BizOps Agile Request Tracker</h3>{{/link-to}}
+  </div>
+</header>
+
+{{outlet}}
+
+<footer id="footer" class="hidden">
+  <div class="inner">
+    <div class="copyright">
+      {{#link-to "release-calendar"}}Release Calendar{{/link-to}}&nbsp;|&nbsp;
+      {{#link-to "bizops-tools"}}BizOps Tools{{/link-to}}&nbsp;|&nbsp;
+      {{#link-to "known-outages"}}Known Outages{{/link-to}}&nbsp;|&nbsp;
+      {{#link-to "feedback"}}Provide Feedback{{/link-to}}
+    </div>
+  </div>
+</footer>

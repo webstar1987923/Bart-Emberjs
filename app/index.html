@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Bart</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/bart/assets/bart.css">
+  <link rel="stylesheet" type="text/css" href="/bart/assets/vendor.css">
+  <script type="text/javascript">
+    function getCookie(name){
+        let nameEQ = name + "=";
+          let ca = document.cookie.split(';');
+          for(let i=0;i < ca.length;i++) {
+              let c = ca[i];
+              while (c.charAt(0)===' ') {
+                c = c.substring(1,c.length);
+              }
+              if (c.indexOf(nameEQ) === 0) {
+                return c.substring(nameEQ.length,c.length);
+              }
+          }
+          return null;
+      }
+      let authcookie = getCookie('attESHr');
+      if(authcookie === null || authcookie.length < 1){
+        window.location.href = 'https://www.e-access.att.com/empsvcs/hrpinmgt/pagLogin/?retURL=' + window.location.href + '&sysname=VIP';
+      }
+  </script>
+  
+  {{content-for "head"}}
+
+  {{content-for "head-footer"}}
+</head>
+<body>
+{{content-for "body"}}
+
+<script src="/bart/assets/vendor.js"></script>
+<script src="/bart/assets/bart.js"></script>
+{{content-for "body-footer"}}
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+</body>
+</html>
